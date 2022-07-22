@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import "./SignUp.css";
+import LandingPage from "../MiddleSection/LandingPage";
 const SignUp = () => {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
@@ -43,74 +44,82 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="signup">
-      <h3>Join the network</h3>
-      <div>
-        <span>Already have an account? </span>
-        <Link className="link" to="/login">
-          Sign In
-        </Link>
-      </div>
+    <>
+      <LandingPage
+        sign={
+          <>
+            <div className="signup">
+              <h3>Join the network</h3>
+              <div>
+                <span>Already have an account? </span>
+                <Link className="link" to="/login">
+                  Sign In
+                </Link>
+              </div>
 
-      <form onSubmit={handleSubmit}>
-        {/* <label>Email: </label> */}
-        <br />
-        <input
-          placeholder="Email"
-          type="text"
-          name="email"
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        {/* <label>First Name: </label> */}
-        <div className="signup__names">
-          <input
-            placeholder="First Name"
-            type="text"
-            name="firstName"
-            onChange={handleChange}
-          />
+              <form onSubmit={handleSubmit}>
+                {/* <label>Email: </label> */}
+                <br />
+                <input
+                  placeholder="Email"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                />
+                <br />
+                <br />
+                {/* <label>First Name: </label> */}
+                <div className="signup__names">
+                  <input
+                    placeholder="First Name"
+                    type="text"
+                    name="firstName"
+                    onChange={handleChange}
+                  />
 
-          {/* <label>Last Name: </label> */}
-          <input
-            placeholder="Last Name"
-            type="text"
-            name="lastName"
-            onChange={handleChange}
-          />
-        </div>
+                  {/* <label>Last Name: </label> */}
+                  <input
+                    placeholder="Last Name"
+                    type="text"
+                    name="lastName"
+                    onChange={handleChange}
+                  />
+                </div>
 
-        <br />
-        {/* <label>User Name: </label> */}
-        <input
-          placeholder="User Name"
-          type="text"
-          name="userName"
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        {/* <label>Password: </label>  */}
-        <input
-          placeholder="Password"
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        <button>Agree and Join</button>
-      </form>
+                <br />
+                {/* <label>User Name: </label> */}
+                <input
+                  placeholder="User Name"
+                  type="text"
+                  name="userName"
+                  onChange={handleChange}
+                />
+                <br />
+                <br />
+                {/* <label>Password: </label>  */}
+                <input
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                />
+                <br />
+                <br />
+                <button>Agree and Join</button>
+              </form>
 
-      <p>
-        I agree to the <span className="link"> Privacy policy </span>and
-        <span className="link"> terms of services</span>
-      </p>
-      <Link className="link" to="/login">
-        Already have an account?
-      </Link>
-    </div>
+              <p>
+                I agree to the <span className="link"> Privacy policy </span>and
+                <span className="link"> terms of services</span>
+              </p>
+              <Link className="link" to="/login">
+                Already have an account?
+              </Link>
+            </div>
+          </>
+        }
+      />
+    </>
   );
 };
 

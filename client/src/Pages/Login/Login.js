@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import LandingPage from "../MiddleSection/LandingPage";
 import "./Login.css";
 
 const Login = () => {
@@ -45,39 +46,50 @@ const Login = () => {
   }, [userData.user, navigate]);
 
   return (
-    <div className="login">
-      <h3>Login to Your Account</h3>
-      <div className="login__CreateAct">
-        <span className="login__CreateActP"> Don't Have an Account?</span>
-        <Link to="/signup" className="CrtAct">
-          Create a new account
-        </Link>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <br />
-        {/* <label>Email: </label> <br/> */}
-        <input
-          placeholder="Your Email"
-          type="text"
-          name="email"
-          onChange={handleChange}
-        />
-        <br /> <br />
-        {/* <label>Password: </label> */}
-        <input
-          placeholder="Your Password"
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <br /> <br />
-        <button>Submit</button>
-      </form>
-      <br />
-      <Link className="CrtAct" to="/signup">
-        Create an account?
-      </Link>
-    </div>
+    <>
+      <LandingPage
+        sign={
+          <>
+            <div className="login">
+              <h3>Login to Your Account</h3>
+              <div className="login__CreateAct">
+                <span className="login__CreateActP">
+                  {" "}
+                  Don't Have an Account?
+                </span>
+                <Link to="/signup" className="CrtAct">
+                  Create a new account
+                </Link>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <br />
+                {/* <label>Email: </label> <br/> */}
+                <input
+                  placeholder="Your Email"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                />
+                <br /> <br />
+                {/* <label>Password: </label> */}
+                <input
+                  placeholder="Your Password"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                />
+                <br /> <br />
+                <button>Submit</button>
+              </form>
+              <br />
+              <Link className="CrtAct" to="/signup">
+                Create an account?
+              </Link>
+            </div>
+          </>
+        }
+      />
+    </>
   );
 };
 

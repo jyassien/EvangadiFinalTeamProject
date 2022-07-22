@@ -12,8 +12,7 @@
   font-size: 13px;
 }
 
-.login__CreateAct {
-}
+ 
 .CrtAct {
   color: #fe8302;
   text-decoration: none;
@@ -23,9 +22,7 @@
   cursor: pointer;
   text-decoration: underline;
 }
-.login__CreateActP {
-  font-size: 13px;
-}
+ 
 .signup input,
 .signup button {
   padding: 10px 0 10px 5px;

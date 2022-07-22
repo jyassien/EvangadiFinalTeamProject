@@ -54,14 +54,23 @@ function App() {
   return (
     <Router>
       <Header />
-      <LandingPage />
+      {/* <LandingPage /> */}
       <div>
         <Routes>
+          {/* <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LandingPage />} />
+
+          <Route path="/" element={<LandingPage />} /> */}
+          {/* passing logout function as props to Home page */}
+
+          {/* original */}
+
           <Route path="/signup" element={<SignUp />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
 
           {/* passing logout function as props to Home page */}
           <Route path="/" element={<Home logout={logout} />} />
+          <Route path="/home" element={<Home logout={logout} />} />
         </Routes>
       </div>
       <Footer />

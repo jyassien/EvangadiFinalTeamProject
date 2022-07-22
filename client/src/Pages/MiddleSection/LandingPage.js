@@ -1,15 +1,10 @@
 import React from "react";
 import "./LandingPage.css";
-import Login from "../Login/Login.js";
-import SignUp from "../SignUp/SignUp";
 
-function LandingPage() {
+function LandingPage({ sign }) {
   return (
     <div className="landingPage">
-      <div className="landingPage__left">
-        {/* <Login /> */}
-        <SignUp />
-      </div>
+      <div className="landingPage__left">{sign}</div>
       <div className="landingPage__right">
         <div className="landingPage__rightBox">
           <div className="Abt"> About </div>
@@ -26,7 +21,7 @@ function LandingPage() {
           </div>
           <div className="landingPage__rightBoxBtn">
             <button>
-              <b> How It Works </b>{" "}
+              <b> How It Works </b>
             </button>
           </div>
         </div>
