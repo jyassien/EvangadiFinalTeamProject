@@ -41,6 +41,7 @@ const SignUp = () => {
       navigate("/");
     } catch (error) {
       console.log("problem ==>", error.response.data.msg);
+      console.log("you've been thrown to the bin");
     }
   };
   return (
@@ -105,7 +106,7 @@ const SignUp = () => {
                 />
                 <br />
                 <br />
-                <button>Agree and Join</button>
+                <button type="submit">Agree and Join</button>
               </form>
 
               <p>

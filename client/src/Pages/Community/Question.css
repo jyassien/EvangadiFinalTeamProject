@@ -1,0 +1,20 @@
+.question {
+  border-bottom: 1px solid rgb(191, 191, 191);
+  width: 100%;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.question__user {
+  display: flex;
+  flex-direction: column;
+}
+.question__user span {
+  margin: -8px 0 2px;
+  padding: 0;
+}
+
+.MdAccountCircle {
+  color: grey;
+}

@@ -1,8 +1,9 @@
 import React from "react";
 import "./Header.css";
 import logo from "../../images/evangadi-logo-home.png";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ logout }) {
   return (
     <div className="header">
       <nav className="header__nav">
@@ -10,10 +11,14 @@ function Header() {
           <img src={logo} alt="logo" />
         </div>
         <div className="header__navRight">
-          <li>Home</li>
+          <Link to="/home" className="Link">
+            <li>Home</li>
+          </Link>
           <li>How it Works</li>
           <li>
-            <button className="header__navBtn">SIGN IN</button>
+            <button onClick={logout} className="header__navBtn">
+              {localStorage.getItem("auth-token") ? "LogOut" : "SIGN IN"}
+            </button>
           </li>
         </div>
       </nav>

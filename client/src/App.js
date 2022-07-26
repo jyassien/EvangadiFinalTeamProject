@@ -3,6 +3,8 @@ import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { UserContext } from "./context/UserContext";
+import Askquestion from "./Pages/Askquestion/Askquestion";
+import AnsQuestion from "./Pages/AnsQuestion/AnsQuestion";
 import Footer from "./Pages/Footer/Footer";
 import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
@@ -53,17 +55,17 @@ function App() {
   }, []);
   return (
     <Router>
-      <Header />
+      <Header logout={logout} />
+
       {/* <LandingPage /> */}
       <div>
         <Routes>
-          {/* <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<LandingPage />} />
+          {/* Newly added routes */}
 
-          <Route path="/" element={<LandingPage />} /> */}
-          {/* passing logout function as props to Home page */}
+          <Route path="/askquestion" element={<Askquestion />} />
+          <Route path="/answer" element={<AnsQuestion />} />
 
-          {/* original */}
+          {/* Original */}
 
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -73,6 +75,8 @@ function App() {
           <Route path="/home" element={<Home logout={logout} />} />
         </Routes>
       </div>
+      <AnsQuestion />
+      <Askquestion />
       <Footer />
     </Router>
   );
