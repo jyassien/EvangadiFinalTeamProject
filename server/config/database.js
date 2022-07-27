@@ -27,8 +27,7 @@ let profile = `CREATE TABLE if not exists profile(
     PRIMARY KEY (user_profile_id),
     FOREIGN KEY (user_id) REFERENCES registration(user_id)
 )`;
-// question_id(PK)	question	question_description
-// 	question_code_block	tags	user_id(FK)	post_id(Unique)
+
 let question = `CREATE TABLE if not exists question(
   question_id int auto_increment,
   user_id int not null,
