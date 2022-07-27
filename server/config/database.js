@@ -1,3 +1,5 @@
+/** @format */
+
 const mysql = require("mysql");
 
 const pool = mysql.createPool({
@@ -50,18 +52,6 @@ let answer = `CREATE TABLE if not exists answer(
   FOREIGN KEY (user_id) REFERENCES registration(user_id)
 )`;
 
-// let question = `CREATE TABLE if not exists question(
-//   question_id int auto_increment,
-//   user_id int not null,
-//   question varchar(150) not null,
-//   question_description varchar(255) not null,
-//   question_code_block varchar(255) not null,
-//   tags int not null,
-//   PRIMARY KEY (question_id),
-//   FOREIGN KEY (user_id) REFERENCES registration(user_id)
-// )`;
-// question_code_block varchar(255) not null,
-// post_id  int auto_increment,
 pool.query(registration, (err, results) => {
   if (err) throw err;
   console.log("registration table created");
