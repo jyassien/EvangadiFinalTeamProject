@@ -1,9 +1,51 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Askquestion.css";
 import Header from "../Header/Header";
 import LandingPage from "../MiddleSection/LandingPage";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
 function Askquestion() {
+  const [form, setForm] = useState({});
+  const navigate = useNavigate();
+
+  //importing global state from context
+  const [userData, setUserData] = useContext(UserContext);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      //sending data to be registered in database
+      await axios.post("http://localhost:4000/api/users", form);
+
+      //once registered the login automatically so send the new user info to be logged in
+      const loginRes = await axios.post(
+        "http://localhost:4000/api/users/login",
+        {
+          title: form.title,
+          description: form.description,
+        }
+      );
+
+      // set the global state with the new user info
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+
+      //set localStorage with the token
+      localStorage.setItem("auth-token", loginRes.data.token);
+
+      //navigate to homepage once the user is signed up
+      navigate("/home");
+    } catch (error) {
+      console.log("problem ==>", error.response.data.msg);
+      console.log("you've been thrown to the bin");
+    }
+  };
   return (
     <div className="container">
       <div className="askcover">
@@ -23,21 +65,20 @@ function Askquestion() {
           </div>
           <div className="askcover__input">
             <div className="form_container">
-              <form action="submit">
+              <form onSubmit={handleSubmit} action="submit">
                 <input
+                  name="title"
                   type="text"
                   className="askcover__qtitle"
                   placeholder="Title"
+                  onChange={handleChange}
                 />
                 <br />
                 <br />
                 <textarea
-                  // id="txtid"
-                  // name="txtname"
-                  // rows="10"
-                  // cols="75"
-                  // maxlength="1200"
+                  name="description"
                   placeholder="Question Description"
+                  onChange={handleChange}
                   style={{
                     border: "1px solid rgb(191, 191, 191)",
                     borderRadius: "5px ",

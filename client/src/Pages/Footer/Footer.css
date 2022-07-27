@@ -1,6 +1,11 @@
 .footer {
+  position: absolute;
+  top: 90%;
+  /* left: 0px; */
+  width: 100%;
   display: flex;
   justify-content: space-around;
+  /* margin-top: 100px; */
   padding: 40px 0 40px 0;
   background-color: #3b455a;
   color: white;

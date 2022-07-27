@@ -75,8 +75,8 @@ function App() {
           <Route path="/home" element={<Home logout={logout} />} />
         </Routes>
       </div>
-      <AnsQuestion />
-      <Askquestion />
+      {/* <AnsQuestion />
+      <Askquestion /> */}
       <Footer />
     </Router>
   );

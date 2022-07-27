@@ -37,21 +37,21 @@ const Home = ({ logout }) => {
         <div className="home__questionLists">
           <div
             onClick={() => {
-              navigate("/question");
+              navigate("/askquestion");
             }}
           >
             <Question />
           </div>
           <div
             onClick={() => {
-              navigate("/question");
+              navigate("/askquestion");
             }}
           >
             <Question />
           </div>
           <div
             onClick={() => {
-              navigate("/question");
+              navigate("/askquestion");
             }}
           >
             <Question />
