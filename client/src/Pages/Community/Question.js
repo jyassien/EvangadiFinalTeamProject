@@ -7,7 +7,7 @@ function Question({ show }) {
     <div className="question">
       <div className="question__user">
         <MdAccountCircle style={{ fontSize: 58 }} className="MdAccountCircle" />
-        <span>"username: {show?.user_id}</span>
+        <span>{show?.user_name}</span>
       </div>
       <div>
         <p>{show?.question || "['the question goes here]'?"} </p>

@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AnsQuestion.css";
 import { MdAccountCircle } from "react-icons/md";
 import Question from "../Community/Question";
 import Answer from "../Community/Answer";
+import { useParams, useLocation } from "react-router-dom";
 
-function AnsQuestion() {
+function AnsQuestion(props) {
+  const { questionId } = useParams();
+  const [askedQuestion, setAskedQuestion] = useState({});
+
+  // get access to the data on state
+  const location = useLocation();
+  const { question } = location.state;
+  console.log("Location data", question);
+
+  useEffect(() => {
+    setAskedQuestion(question);
+  }, []);
   return (
     <div className="answer">
       <div className="answer__top">
         <div className="answer__header">
           <p>Question</p>
-          <p>'the question goes here?'</p>
-          <p>'question detail goes here'</p>
+          {/* <p>'the question goes here?'{questionId}</p> */}
+          <p>{question.question}</p>
+          <p>{question.question_description}</p>
         </div>
 
         <div className="answer__title">

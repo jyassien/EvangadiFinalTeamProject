@@ -11,7 +11,8 @@ const Home = ({ logout }) => {
   const [userData, setUserData] = useContext(UserContext);
   const [page, setPage] = useState("Home");
   const [allQuestions, setAllQuestions] = useState([]);
-
+  let [currrentQuestion, setCurrrentQuestion] = useState([]);
+  let q = [];
   const navigate = useNavigate();
   useEffect(() => {
     if (!userData.user) navigate("/login");
@@ -54,14 +55,23 @@ const Home = ({ logout }) => {
         <div className="home__questionLists">
           <div>
             {allQuestions?.map((question) => (
-              <div>
-                {/* <h1>{question.question_id}</h1>
-                <h1>{question.question}</h1>
-                <h1>{question.question_description}</h1> */}
-                <Question show={question} />
+              <div key={question.question_id}>
+                <Link
+                  // to={`/answer`}
+                  to={`/answer/:${question.question_id}`}
+                  // state prop used to pass the data along the link
+                  state={{ question: question }}
+                  className="Link"
+                >
+                  <Question show={question} />
+                </Link>
               </div>
             ))}
           </div>
+          {/* {setCurrrentQuestion([
+                    question.title,
+                    question.question_description,
+                  ])} */}
 
           {/* <div
             onClick={() => {

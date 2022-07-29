@@ -72,7 +72,8 @@ function App() {
           {/* Newly added routes */}
 
           <Route path="/ask" element={<AskQuestion />} />
-          <Route path="/answer" element={<AnsQuestion />} />
+          {/* <Route path={`/answer`} element={<AnsQuestion />} /> */}
+          <Route path={`/answer/:questionId`} element={<AnsQuestion />} />
         </Routes>
       </div>
       {/* <AnsQuestion />
