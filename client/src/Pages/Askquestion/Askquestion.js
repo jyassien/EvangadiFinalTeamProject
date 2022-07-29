@@ -1,51 +1,61 @@
-import React, { useContext, useState } from "react";
-import "./Askquestion.css";
+import React, { useContext, useEffect, useState } from "react";
+import "./AskQuestion.css";
 import Header from "../Header/Header";
 import LandingPage from "../MiddleSection/LandingPage";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 
-function Askquestion() {
+function AskQuestion() {
   const [form, setForm] = useState({});
+  const [userData, setUserData] = useContext(UserContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!userData.user) navigate("/login");
+  }, [userData.user, navigate]);
+
   //importing global state from context
-  const [userData, setUserData] = useContext(UserContext);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    console.log("ask question>>> form data is being registered");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("ask question>>> -1");
+    setForm(() => {
+      return { ...form, userId: userData.user.id };
+    });
+    console.log("[[[[[[[[[ Values to be post ", userData.user?.id);
+    console.log(
+      "[[[[[[[[[ Values to be post ",
+      form.title,
+      form.description,
+      userData.user.id
+    );
+
     try {
+      console.log("ask question>>> 0");
+      console.log(form);
+
       //sending data to be registered in database
-      await axios.post("http://localhost:4000/api/users", form);
-
-      //once registered the login automatically so send the new user info to be logged in
-      const loginRes = await axios.post(
-        "http://localhost:4000/api/users/login",
-        {
-          title: form.title,
-          description: form.description,
-        }
-      );
-
-      // set the global state with the new user info
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
+      await axios.post("http://localhost:4000/api/questions", {
+        title: form.title,
+        description: form.description,
+        userId: userData.user.id,
       });
+      console.log("ask question>>> 1");
 
-      //set localStorage with the token
-      localStorage.setItem("auth-token", loginRes.data.token);
-
-      //navigate to homepage once the user is signed up
-      navigate("/home");
+      //navigate to homepage once the question is posted
+      navigate("/");
+      console.log("ask question>>> 2");
     } catch (error) {
       console.log("problem ==>", error.response.data.msg);
-      console.log("you've been thrown to the bin");
+      console.log("you've been thrown in to the bin");
     }
   };
+
+  // document.getElementById("email").value = userData.user?.display_name;
   return (
     <div className="container">
       <div className="askcover">
@@ -88,7 +98,6 @@ function Askquestion() {
                   }}
                 ></textarea>
                 <br />
-
                 <button className="btnpost">Post Your Question</button>
               </form>
             </div>
@@ -99,4 +108,4 @@ function Askquestion() {
   );
 }
 
-export default Askquestion;
+export default AskQuestion;

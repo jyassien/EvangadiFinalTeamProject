@@ -54,20 +54,4 @@ module.exports = {
       }
     );
   },
-  ////////////////////////////////////// New Methods ///////////////////
-  //data comes form the user questions
-  addQuestion: (data, callback) => {
-    //inserting data to registration table
-    pool.query(
-      `INSERT INTO question(question,question_description)VALUES(?,?)`,
-      [data.title, data.description],
-      (err, result) => {
-        if (err) {
-          return callback(err);
-        }
-        return callback(null, result);
-      }
-    );
-  },
-  ////////////////////////////////////// New Methods ///////////////////
 };
