@@ -6,6 +6,7 @@ import AskQuestion from "../AskQuestion/AskQuestion";
 import Answer from "../AnsQuestion/AnsQuestion";
 import Question from "../Community/Question";
 import axios from "axios";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const Home = ({ logout }) => {
   const [userData, setUserData] = useContext(UserContext);
@@ -16,15 +17,15 @@ const Home = ({ logout }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!userData.user) navigate("/login");
-    console.log(">>>>>>>>Home useEffect: 0");
+    // console.log(">>>>>>>>Home useEffect: 0");
     const fetchQuestions = async () => {
-      console.log(">>>>>>>>Home useEffect >> fetchQuestions: 1");
+      // console.log(">>>>>>>>Home useEffect >> fetchQuestions: 1");
 
       let questions = await axios.get("http://localhost:4000/api/questions");
-      console.log(">>>>>>>>Home useEffect >> fetchQuestions: 2");
+      // console.log(">>>>>>>>Home useEffect >> fetchQuestions: 2");
 
       questions = questions.data.data;
-      console.log(">>>>>>>>Fetched questions:", questions);
+      // console.log(">>>>>>>>Fetched questions:", questions);
       setAllQuestions(() => {
         return questions;
       });
@@ -60,27 +61,22 @@ const Home = ({ logout }) => {
                   // to={`/answer`}
                   to={`/answer/:${question.question_id}`}
                   // state prop used to pass the data along the link
-                  state={{ question: question }}
+                  state={{
+                    question: question,
+                    currentUserId: userData.user?.id,
+                  }}
                   className="Link"
                 >
                   <Question show={question} />
+                  <MdArrowForwardIos className="MdArrowForwardIos" />
                 </Link>
               </div>
             ))}
           </div>
-          {/* {setCurrrentQuestion([
-                    question.title,
-                    question.question_description,
-                  ])} */}
-
-          {/* <div
-            onClick={() => {
-              navigate("/AskQuestion");
-            }}
-          >
-            <Question />
-          </div> */}
         </div>
+        {allQuestions.length < 3 && (
+          <div className="home__questionListsBottom" />
+        )}
         {/* logout when the button clicked in which the function comes from app.js */}
         {/* <button onClick={logout}>Log out</button> */}
       </div>

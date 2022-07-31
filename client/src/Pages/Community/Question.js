@@ -10,7 +10,11 @@ function Question({ show }) {
         <span>{show?.user_name}</span>
       </div>
       <div>
-        <p>{show?.question || "['the question goes here]'?"} </p>
+        <p>
+          {show?.question ||
+            show?.answer ||
+            "['the question/answer goes here]'?"}{" "}
+        </p>
       </div>
     </div>
   );

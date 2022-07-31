@@ -2,6 +2,7 @@
   width: 70vw;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 6vh;
 }
 .answer__top {
   /* margin-bottom: 40px; */
@@ -27,9 +28,7 @@
   border-top: 1px solid rgb(191, 191, 191);
   border-bottom: 1px solid rgb(191, 191, 191);
 }
-.answer__list div {
-  border: none;
-}
+
 .answer__bottom {
   border-radius: 10px;
   /* border: 2px solid rgb(207, 205, 205); */

@@ -40,13 +40,16 @@ let question = `CREATE TABLE if not exists question(
 let answer = `CREATE TABLE if not exists answer(
   answer_id int auto_increment,
   answer varchar(255) not null,
-  answer_code_block varchar(255),
-  user_id int not null,
   question_id int not null,
+  user_id int not null,
   PRIMARY KEY (answer_id),
-  FOREIGN KEY (question_id) REFERENCES question(question_id)
+  FOREIGN KEY (question_id) REFERENCES question(question_id),
+  FOREIGN KEY (user_id) REFERENCES registration(user_id)
   )`;
-
+// user_id int not null,
+// question_id int not null,
+//  answer_code_block varchar(255),
+// FOREIGN KEY (question_id) REFERENCES question(question_id)
 // FOREIGN KEY (user_id) REFERENCES registration(user_id),
 pool.query(registration, (err, results) => {
   if (err) throw err;

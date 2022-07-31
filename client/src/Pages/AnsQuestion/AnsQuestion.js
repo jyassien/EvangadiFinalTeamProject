@@ -1,21 +1,77 @@
 import React, { useEffect, useState } from "react";
 import "./AnsQuestion.css";
-import { MdAccountCircle } from "react-icons/md";
 import Question from "../Community/Question";
-import Answer from "../Community/Answer";
 import { useParams, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function AnsQuestion(props) {
-  const { questionId } = useParams();
-  const [askedQuestion, setAskedQuestion] = useState({});
+  let { questionId } = useParams(); // returns ':7'
+  // console.log(typeof questionId);
+  questionId = parseInt(questionId.slice(1, 2));
+
+  const [answer, setAnswer] = useState({});
+  const [prevAnswers, setPrevAnswers] = useState();
 
   // get access to the data on state
   const location = useLocation();
-  const { question } = location.state;
-  console.log("Location data", question);
+  const { question, currentUserId } = location.state;
+  // console.log("Location data", question);
+
+  const handleChange = async (e) => {
+    // console.log(e.target.value);
+    await setAnswer({
+      answer: e.target.value,
+      questionId: question.question_id,
+      userId: currentUserId,
+    });
+  };
+  const handleSubmint = async (e) => {
+    e.preventDefault();
+    // console.log(">>>>> post answer -1");
+    try {
+      // console.log(">>>>> post answer 0");
+      // console.log(answer);
+      // await axios.post("http://localhost:4000/api/questions", {
+      //   answer: answer.answer,
+      // });
+      await axios.post("http://localhost:4000/api/answers", {
+        answer: answer.answer,
+        questionId: answer.questionId,
+        userId: answer.userId,
+      });
+      // console.log(">>>>> post answer 1");
+      // console.log(">>>>>>>>  your answer is submitted");
+      window.location.reload(false);
+
+      // If set to true, the browser will do a complete
+      //  page refresh from the server and not from the
+      // cached version of the page.
+    } catch (err) {
+      // console.log(">>>>>>>> ERROR  your answer is not submitted");
+      console.log("Answers can't be submitted: ", err);
+    }
+  };
 
   useEffect(() => {
-    setAskedQuestion(question);
+    // setAskedQuestion(question);
+    const fetchAnswers = async () => {
+      const answers = await axios.get(
+        `http://localhost:4000/api/answers/${questionId}`
+      );
+      // console.log(answers.data);
+      // console.log(answers.data.data);
+      setPrevAnswers(() => {
+        return answers.data?.data;
+      });
+      // console.log(">>>>>>prevAnswers ", prevAnswers);
+    };
+    try {
+      fetchAnswers();
+
+      console.log(">>>>> Successfully fetched answers.");
+    } catch (err) {
+      console.log(">>>>> Can't fetch answers.");
+    }
   }, []);
   return (
     <div className="answer">
@@ -28,10 +84,16 @@ function AnsQuestion(props) {
         </div>
 
         <div className="answer__title">
-          <h4>Answer From The Community</h4>
+          {prevAnswers?.length != 0 && <h4>Answer From The Community</h4>}
         </div>
         <div className="answer__list">
-          <Answer show={"what is the question"} />
+          <div>
+            {prevAnswers?.map((prevAnswer) => (
+              <div key={prevAnswer.answer_id}>
+                <Question show={prevAnswer} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="answer__bottom">
@@ -44,8 +106,10 @@ function AnsQuestion(props) {
           </center>
 
           <div className="answer__form">
-            <form>
+            <form onSubmit={handleSubmint}>
               <textarea
+                onChange={handleChange}
+                name="answerField"
                 placeholder="Your Answer ..."
                 style={{
                   border: "1px solid rgb(191, 191, 191)",

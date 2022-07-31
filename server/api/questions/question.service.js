@@ -15,7 +15,7 @@ module.exports = {
   },
   importQuestions: (callback) => {
     pool.query(
-      `SELECT registration.user_name,question_id, question,question_description,question_code_block FROM question JOIN registration ON question.user_id = registration.user_id ORDER BY question_id DESC`,
+      `SELECT registration.user_name,question_id, question,question_description,question.user_id FROM question JOIN registration ON question.user_id = registration.user_id ORDER BY question_id DESC`,
       (err, result) => {
         if (err) {
           console.log("import questions: database connection error");

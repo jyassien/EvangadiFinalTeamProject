@@ -18,24 +18,24 @@ function AskQuestion() {
   //importing global state from context
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log("ask question>>> form data is being registered");
+    // console.log("ask question>>> form data is being registered");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("ask question>>> -1");
+    // console.log("ask question>>> -1");
     setForm(() => {
       return { ...form, userId: userData.user.id };
     });
-    console.log("[[[[[[[[[ Values to be post ", userData.user?.id);
-    console.log(
-      "[[[[[[[[[ Values to be post ",
-      form.title,
-      form.description,
-      userData.user.id
-    );
+    // console.log("[[[[[[[[[ Values to be post ", userData.user?.id);
+    // console.log(
+    //   "[[[[[[[[[ Values to be post ",
+    //   form.title,
+    //   form.description,
+    //   userData.user.id
+    // );
 
     try {
-      console.log("ask question>>> 0");
+      // console.log("ask question>>> 0");
       console.log(form);
 
       //sending data to be registered in database
@@ -44,11 +44,11 @@ function AskQuestion() {
         description: form.description,
         userId: userData.user.id,
       });
-      console.log("ask question>>> 1");
+      // console.log("ask question>>> 1");
 
       //navigate to homepage once the question is posted
       navigate("/");
-      console.log("ask question>>> 2");
+      // console.log("ask question>>> 2");
     } catch (error) {
       console.log("problem ==>", error.response.data.msg);
       console.log("you've been thrown in to the bin");

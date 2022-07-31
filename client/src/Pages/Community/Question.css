@@ -3,6 +3,7 @@
   width: 100%;
   padding: 6px 0;
   display: flex;
+  gap: 10px;
   align-items: center;
   font-size: 13px;
 }
@@ -13,6 +14,7 @@
 .question__user span {
   margin: -5px 0 2px;
   padding: 0;
+  font-size: 11px;
 }
 
 .MdAccountCircle {
