@@ -36,8 +36,7 @@ let question = `CREATE TABLE if not exists question(
   PRIMARY KEY (question_id),
   FOREIGN KEY (user_id) REFERENCES registration(user_id)
   )`;
-// post_id varchar(255) not null,
-// UNIQUE KEY (post_id),
+ 
 let answer = `CREATE TABLE if not exists answer(
   answer_id int auto_increment,
   answer varchar(255) not null,
@@ -47,11 +46,7 @@ let answer = `CREATE TABLE if not exists answer(
   FOREIGN KEY (question_id) REFERENCES question(question_id),
   FOREIGN KEY (user_id) REFERENCES registration(user_id)
   )`;
-// user_id int not null,
-// question_id int not null,
-//  answer_code_block varchar(255),
-// FOREIGN KEY (question_id) REFERENCES question(question_id)
-// FOREIGN KEY (user_id) REFERENCES registration(user_id),
+ 
 pool.query(registration, (err, results) => {
   if (err) throw err;
   console.log("registration table created");
