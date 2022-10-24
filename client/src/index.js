@@ -5,15 +5,6 @@ import "./index.css";
 import App from "./App";
 import { UserProvider } from "./context/UserContext";
 
-// Can't use this syntax on Node 18. (It works on Node 17 or less).
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <UserProvider>
-//       <App />
-//     </UserProvider>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
